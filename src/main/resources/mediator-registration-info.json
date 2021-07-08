@@ -1,0 +1,33 @@
+{
+  "urn": "urn:uuid:04706d60-e004-11eb-a619-872192b0da65",
+  "version": "0.1.0",
+  "name": "tnmc-mediator-hrhis",
+  "description": "An openHIM mediator for handling system integration between HRHIS and TNMC",
+  "endpoints": [
+    {
+      "name": "tnmc-mediator-hrhis Route",
+      "host": "localhost",
+      "port": "3034",
+      "path": "/tnmc",
+      "type": "http"
+    }
+  ],
+  "defaultChannelConfig": [
+    {
+      "name": "tnmc-mediator-hrhis",
+      "urlPattern": "^/tnmc$",
+      "type": "http",
+      "allow": ["tnmc-mediator-hrhis"],
+      "routes": [
+        {
+          "name": "tnmc-mediator-hrhis Route",
+          "host": "localhost",
+          "port": "3034",
+          "path": "/tnmc",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    }
+  ]
+}
