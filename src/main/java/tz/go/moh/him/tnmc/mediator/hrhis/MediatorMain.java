@@ -15,20 +15,12 @@ public class MediatorMain {
 
     private static RoutingTable buildRoutingTable() throws RoutingTable.RouteAlreadyMappedException {
         RoutingTable routingTable = new RoutingTable();
-
-        //TODO Configure routes here
-        //...
         routingTable.addRoute("/tnmc", DefaultOrchestrator.class);
-
         return routingTable;
     }
 
     private static StartupActorsConfig buildStartupActorsConfig() {
         StartupActorsConfig startupActors = new StartupActorsConfig();
-
-        //TODO Add own startup actors here
-        //...
-
         return startupActors;
     }
 
@@ -91,6 +83,10 @@ public class MediatorMain {
         }
 
         MediatorConfig config = loadConfig(configPath);
+
+        //TODO this should be removed in production environments it is unsafe
+        config.setSSLContext(new MediatorConfig.SSLContext(true));
+
         final MediatorServer server = new MediatorServer(system, config);
 
         //setup shutdown hook
