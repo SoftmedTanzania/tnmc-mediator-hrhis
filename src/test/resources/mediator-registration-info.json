@@ -1,0 +1,77 @@
+{
+  "urn": "urn:uuid:04706d60-e004-11eb-a619-872192b0da65",
+  "version": "0.1.0",
+  "name": "HRHIS - TNMC Mediator",
+  "description": "An openHIM mediator for handling system integration between HRHIS and TNMC",
+  "endpoints": [
+    {
+      "name": "HRHIS to TNMC Route",
+      "host": "localhost",
+      "port": "3034",
+      "path": "/tnmc",
+      "type": "http"
+    }
+  ],
+  "defaultChannelConfig": [
+    {
+      "name": "HRHIS - TNMC Channel",
+      "urlPattern": "^/tnmc$",
+      "type": "http",
+      "allow": ["hrhis-role"],
+      "routes": [
+        {
+          "name": "HRHIS to TNMC Route",
+          "host": "localhost",
+          "port": "3034",
+          "path": "/tnmc",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    }
+  ],
+  "configDefs": [
+    {
+      "param": "destinationConnectionProperties",
+      "displayName": "Destination Connection Properties",
+      "description": "Configuration to set the hostname, port and path for the destination server",
+      "type": "struct",
+      "template": [
+        {
+          "param": "destinationHost",
+          "displayName": "Destination Host Name",
+          "description": "IP address/hostname of the destination server. e.g 192.168.1.1",
+          "type": "string"
+        },
+        {
+          "param": "destinationPort",
+          "displayName": "Destination Port Number",
+          "description": "The port number of the destination server. e.g 8080",
+          "type": "number"
+        },
+        {
+          "param": "destinationPath",
+          "displayName": "Destination Path",
+          "description": "The destination path",
+          "type": "string"
+        },
+        {
+          "param": "destinationScheme",
+          "displayName": "Destination Scheme",
+          "description": "Whether the destination is using HTTP or HTTPS requests.",
+          "type": "option",
+          "values": [
+            "http",
+            "https"
+          ]
+        },
+        {
+          "param": "destinationToken",
+          "displayName": "Destination Access Token",
+          "description": "The destination access token for authorizing requests from the HIM.",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
