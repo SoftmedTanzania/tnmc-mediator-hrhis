@@ -12,9 +12,9 @@ public class CustomMockLauncher extends MockLauncher {
         super(actorsToLaunch);
     }
 
-    public CustomMockLauncher(Class<Object> aClass, String expectedMessageType, String name) {
+    public CustomMockLauncher(Class<Object> aClass, String name) {
         super(new ArrayList<>());
-        this.getContext().actorOf(Props.create(aClass, expectedMessageType), name);
+        this.getContext().actorOf(Props.create(aClass), name);
     }
 
 }

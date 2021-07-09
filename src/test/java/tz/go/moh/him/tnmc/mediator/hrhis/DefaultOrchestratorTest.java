@@ -106,7 +106,7 @@ public class DefaultOrchestratorTest {
         assertNotNull(system);
 
         new JavaTestKit(system) {{
-            system.actorOf(Props.create(CustomMockLauncher.class, MockDestination.class, null, "http-connector"), configuration.getName());
+            system.actorOf(Props.create(CustomMockLauncher.class, MockDestination.class, "http-connector"), configuration.getName());
 
             final ActorRef defaultOrchestrator = system.actorOf(Props.create(DefaultOrchestrator.class, configuration));
 

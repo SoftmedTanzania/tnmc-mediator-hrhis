@@ -13,16 +13,6 @@ import java.util.Map;
  * Represents a mock destination.
  */
 public class MockDestination extends MockHTTPConnector {
-
-    /**
-     * The expected message type
-     */
-    private final String expectedMessageType;
-
-    public MockDestination(String expectedMessageType) {
-        this.expectedMessageType = expectedMessageType;
-    }
-
     /**
      * Gets the response.
      *
