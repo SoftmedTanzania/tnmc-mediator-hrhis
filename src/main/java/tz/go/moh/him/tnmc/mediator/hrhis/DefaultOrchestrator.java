@@ -65,6 +65,9 @@ public class DefaultOrchestrator extends UntypedActor {
             host = config.getProperty("destination.host");
             portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
             path = config.getProperty("destination.api.path");
+            token = config.getProperty("destination.token");
+            String authHeader = "Bearer " + token;
+            headers.put(HttpHeaders.AUTHORIZATION, authHeader);
 
         } else {
             log.debug("Using dynamic config");
@@ -90,13 +93,13 @@ public class DefaultOrchestrator extends UntypedActor {
 
         host = scheme + "://" + host + ":" + portNumber + path;
 
-        MediatorHTTPRequest forwardToDhis2Request = new MediatorHTTPRequest(
+        MediatorHTTPRequest forwardToTnmcRequest = new MediatorHTTPRequest(
                 requestHandler, getSelf(), "Sending Data to TNMC", "GET",
                 host, message, headers, params
         );
 
         ActorSelection httpConnector = getContext().actorSelection(config.userPathFor("http-connector"));
-        httpConnector.tell(forwardToDhis2Request, getSelf());
+        httpConnector.tell(forwardToTnmcRequest, getSelf());
     }
 
     @Override
