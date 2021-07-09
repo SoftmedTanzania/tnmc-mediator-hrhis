@@ -78,7 +78,7 @@ public class DefaultOrchestrator extends UntypedActor {
             portNumber = connectionProperties.getInt("destinationPort");
             scheme = connectionProperties.getString("destinationScheme");
 
-            if (connectionProperties.has("destinationUsername") && connectionProperties.has("destinationPassword")) {
+            if (connectionProperties.has("destinationToken")) {
                 token = connectionProperties.getString("destinationToken");
 
                 // if we have a token
