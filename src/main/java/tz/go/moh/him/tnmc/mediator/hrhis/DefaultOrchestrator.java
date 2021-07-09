@@ -91,15 +91,14 @@ public class DefaultOrchestrator extends UntypedActor {
             path = connectionProperties.getString("destinationPath");
         }
 
-        host = scheme + "://" + host + ":" + portNumber + path;
-
         MediatorHTTPRequest forwardToTnmcRequest = new MediatorHTTPRequest(
-                requestHandler, getSelf(), "Sending Data to TNMC", "GET",
-                host, message, headers, params
+                requestHandler, getSelf(), "Sending Data to TNMC", "GET", scheme,
+                host, portNumber, path, message, headers, params
         );
 
-        ActorSelection httpConnector = getContext().actorSelection(config.userPathFor("http-connector"));
-        httpConnector.tell(forwardToTnmcRequest, getSelf());
+        ActorSelection actor = getContext().actorSelection(config.userPathFor("http-connector"));
+        config.setSSLContext(new MediatorConfig.SSLContext(true));
+        actor.tell(forwardToTnmcRequest, getSelf());
     }
 
     @Override
